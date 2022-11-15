@@ -160,7 +160,9 @@ export default class Project extends Base {
         return;
       }
 
-      if (!fs.existsSync(selectedPort)) {
+      // I need a more elegant way to check the serial port
+      var x = this.getUserPlatform();
+      if (!fs.existsSync(selectedPort) && x != 'win32') {
         vscode.window.showErrorMessage("Port does not exist, please connect device and try again!");
         this.statusDone();
         return;
